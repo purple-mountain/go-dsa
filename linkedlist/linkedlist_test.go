@@ -4,83 +4,85 @@ import (
 	"testing"
 )
 
-func TestLinkedList(t *testing.T) {
-	t.Run("get", func(t *testing.T) {
-		linkedlist := newLinkedListExample()
-		got := linkedlist.get(5)
-		want := 5
-		assert(t, got, want)
+func TestGet(t *testing.T) {
+	linkedlist := newLinkedListExample()
+	got := linkedlist.get(5)
+	want := 5
+	assert(t, got, want)
 
-		got = linkedlist.get(0)
-		want = linkedlist.head.value
-		assert(t, got, want)
+	got = linkedlist.get(0)
+	want = linkedlist.head.value
+	assert(t, got, want)
 
-		got = linkedlist.get(linkedlist.length - 1)
-		want = linkedlist.tail.value
-		assert(t, got, want)
-	})
-	t.Run("remove", func(t *testing.T) {
-		linkedlist := newLinkedListExample()
-		length := linkedlist.length
-		got := linkedlist.remove(4)
-		want := 4
-		assert(t, got, want)
-		assert(t, linkedlist.length, length-1)
+	got = linkedlist.get(linkedlist.length - 1)
+	want = linkedlist.tail.value
+	assert(t, got, want)
+}
 
-		got = linkedlist.get(4)
-		want = 5
-		assert(t, got, want)
-	})
-	t.Run("append", func(t *testing.T) {
-		linkedlist := newLinkedListExample()
-		length := linkedlist.length
-		linkedlist.append(10)
-		assert(t, linkedlist.length, length+1)
+func TestRemove(t *testing.T) {
+	linkedlist := newLinkedListExample()
+	length := linkedlist.length
+	got := linkedlist.remove(4)
+	want := 4
+	assert(t, got, want)
+	assert(t, linkedlist.length, length-1)
 
-		got := linkedlist.tail.value
-		want := 10
-		assert(t, got, want)
+	got = linkedlist.get(4)
+	want = 5
+	assert(t, got, want)
+}
 
-		got = linkedlist.get(10)
-		want = 10
-		assert(t, got, want)
-	})
-	t.Run("prepend", func(t *testing.T) {
-		linkedlist := newLinkedListExample()
-		length := linkedlist.length
-		linkedlist.prepend(-1)
-		assert(t, linkedlist.length, length+1)
+func TestAppend(t *testing.T) {
+	linkedlist := newLinkedListExample()
+	length := linkedlist.length
+	linkedlist.append(10)
+	assert(t, linkedlist.length, length+1)
 
-		got := linkedlist.head.value
-		want := -1
-		assert(t, got, want)
+	got := linkedlist.tail.value
+	want := 10
+	assert(t, got, want)
 
-		got = linkedlist.get(0)
-		want = -1
-		assert(t, got, want)
-	})
-	t.Run("insertAt", func(t *testing.T) {
-		linkedlist := newLinkedListExample()
-		length := linkedlist.length
-		linkedlist.insertAt(0, 3)
+	got = linkedlist.get(10)
+	want = 10
+	assert(t, got, want)
+}
 
-		got := linkedlist.get(3)
-		want := 0
-		assert(t, got, want)
-		assert(t, linkedlist.length, length+1)
+func TestPrepend(t *testing.T) {
+	linkedlist := newLinkedListExample()
+	length := linkedlist.length
+	linkedlist.prepend(-1)
+	assert(t, linkedlist.length, length+1)
 
-		linkedlist.insertAt(-1, 0)
-		got = linkedlist.get(0)
-		want = -1
-		assert(t, got, want)
-		assert(t, got, linkedlist.head.value)
+	got := linkedlist.head.value
+	want := -1
+	assert(t, got, want)
 
-		linkedlist.insertAt(10, linkedlist.length)
-		got = linkedlist.get(linkedlist.length - 1)
-		want = 10
-		assert(t, got, want)
-		assert(t, got, linkedlist.tail.value)
-	})
+	got = linkedlist.get(0)
+	want = -1
+	assert(t, got, want)
+}
+
+func TestInsertAt(t *testing.T) {
+	linkedlist := newLinkedListExample()
+	length := linkedlist.length
+	linkedlist.insertAt(0, 3)
+
+	got := linkedlist.get(3)
+	want := 0
+	assert(t, got, want)
+	assert(t, linkedlist.length, length+1)
+
+	linkedlist.insertAt(-1, 0)
+	got = linkedlist.get(0)
+	want = -1
+	assert(t, got, want)
+	assert(t, got, linkedlist.head.value)
+
+	linkedlist.insertAt(10, linkedlist.length)
+	got = linkedlist.get(linkedlist.length - 1)
+	want = 10
+	assert(t, got, want)
+	assert(t, got, linkedlist.tail.value)
 }
 
 func assert[T comparable](t *testing.T, got, want T) {
